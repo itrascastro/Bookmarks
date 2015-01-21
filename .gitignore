@@ -8,3 +8,11 @@ nbproject
 .settings
 composer.lock
 vendor/bin
+
+docs/UML/.vpprefdata/.autoSaveProject
+
+docs/UML/.vpprefdata/.autoSaveProjectInfo
+
+docs/UML/tmp/untitled2.working
+
+*.working
