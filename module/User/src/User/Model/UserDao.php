@@ -49,4 +49,22 @@ class UserDao
         return $users;
     }
 
+    public function save($data)
+    {
+        $stm = $this->db->createStatement('INSERT INTO User (email, password, role) VALUES (?, ?, ?)');
+        $stm->execute(array($data['email'], $data['password'], $data['role']));
+    }
+
+    public function delete($id)
+    {
+        $stm = $this->db->createStatement('DELETE FROM User WHERE id = ?');
+        $stm->execute(array($id));
+    }
+
+    public function update($data)
+    {
+        $stm = $this->db->createStatement('UPDATE User SET email = ?, password = ?, role = ? WHERE id = ?');
+        $stm->execute(array($data['email'], $data['password'], $data['role'], $data['id']));
+    }
+
 }

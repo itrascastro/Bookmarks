@@ -19,6 +19,7 @@ namespace User\Controller;
 
 use User\Model\UserDao;
 use Zend\Mvc\Controller\AbstractActionController;
+use Zend\View\Model\ViewModel;
 
 class IndexController extends AbstractActionController
 {
@@ -40,5 +41,46 @@ class IndexController extends AbstractActionController
         $users = $this->model->findAll();
 
         return ['users' => $users];
+    }
+
+    public function addAction()
+    {
+        return [array('action' => $this->url('user\index\addDo'), 'id' => null)];
+    }
+
+    public function addDoAction()
+    {
+        $data = $this->params()->fromPost();
+        $this->model->save($data);
+
+        $this->redirect()->toRoute('user\index\index');
+    }
+
+    public function deleteAction()
+    {
+        $id = $this->params()->fromRoute('id');
+        $this->model->delete($id);
+
+        $this->redirect()->toRoute('user\index\index');
+    }
+
+    public function updateAction()
+    {
+        $id = $this->params()->fromRoute('id');
+
+        $view = new ViewModel();
+        $view->setTemplate('user/index/add.phtml');
+        //$view->action = $this->url('user\index\index');
+        $view->id = $id;
+
+        return $view;
+    }
+
+    public function updateDoAction()
+    {
+        $data = $this->params()->fromPost();
+        $this->model->update($data);
+
+        $this->redirect()->toRoute('user\index\index');
     }
 }

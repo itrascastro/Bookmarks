@@ -16,7 +16,13 @@
             <td><?php echo $this->escapeHtml($user->getPassword()); ?></td>
             <td><?php echo $this->escapeHtml($user->getRole()); ?></td>
             <td><?php echo $this->escapeHtml($user->getDate()); ?></td>
+            <td><a href="<?php echo $this->url('user\index\delete', array('id' => $user->getId())); ?>">Delete</a></td>
+            <td><a href="<?php echo $this->url('user\index\update', array('id' => $user->getId())); ?>">Update</a></td>
         </tr>
         <?php endforeach; ?>
     </table>
+</div>
+
+<div>
+    <a href="<?php echo $this->url('user\index\add'); ?>">New user</a>
 </div>
