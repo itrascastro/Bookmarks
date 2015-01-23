@@ -23,12 +23,8 @@ return array(
         ),
     ),
     'service_manager' => array(
-        'abstract_factories' => array(
-            'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
-            'Zend\Log\LoggerAbstractServiceFactory',
-        ),
-        'aliases' => array(
-            'translator' => 'MvcTranslator',
+        'factories' => array(
+            'UserDao' => 'User\Model\Factory\UserDaoFactory',
         ),
     ),
     'translator' => array(
@@ -43,7 +39,10 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'User\Controller\Index' => 'User\Controller\IndexController'
+            //'User\Controller\Index' => 'User\Controller\IndexController'
+        ),
+        'factories' => array(
+            'User\Controller\Index' => 'User\Controller\Factory\IndexControllerFactory',
         ),
     ),
     'view_manager' => array(

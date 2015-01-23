@@ -1,1 +1,22 @@
-<?php echo $this->appName; ?>
+<h1>Users</h1>
+
+<div>
+    <table>
+        <thead>
+            <th>Id</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th>Role</th>
+            <th>Date</th>
+        </thead>
+        <?php foreach ($users as $user): ?>
+        <tr>
+            <td><?php echo $this->escapeHtml($user->getId()); ?></td>
+            <td><?php echo $this->escapeHtml($user->getEmail()); ?></td>
+            <td><?php echo $this->escapeHtml($user->getPassword()); ?></td>
+            <td><?php echo $this->escapeHtml($user->getRole()); ?></td>
+            <td><?php echo $this->escapeHtml($user->getDate()); ?></td>
+        </tr>
+        <?php endforeach; ?>
+    </table>
+</div>

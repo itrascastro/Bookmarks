@@ -14,31 +14,27 @@
  * file that was distributed with this source code.
  */
 
-namespace User\Controller;
+namespace User\Controller\Factory;
 
 
-use User\Model\UserDao;
-use Zend\Mvc\Controller\AbstractActionController;
+use User\Controller\IndexController;
+use Zend\ServiceManager\FactoryInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
 
-class IndexController extends AbstractActionController
+class IndexControllerFactory implements FactoryInterface
 {
-    /**
-     * @var UserDao
-     */
-    private $model;
 
     /**
-     * @param UserDao $model
+     * Create service
+     *
+     * @param ServiceLocatorInterface $serviceLocator
+     *
+     * @return mixed
      */
-    function __construct(UserDao $model)
+    public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $this->model = $model;
-    }
-
-    public function indexAction()
-    {
-        $users = $this->model->findAll();
-
-        return ['users' => $users];
+        $sm = $serviceLocator->getServiceLocator();
+        $model = $sm->get('UserDao');
+        return new IndexController($model);
     }
 }
