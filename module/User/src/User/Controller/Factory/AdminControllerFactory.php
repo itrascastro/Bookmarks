@@ -17,11 +17,11 @@
 namespace User\Controller\Factory;
 
 
-use User\Controller\IndexController;
+use User\Controller\AdminController;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class IndexControllerFactory implements FactoryInterface
+class AdminControllerFactory implements FactoryInterface
 {
 
     /**
@@ -35,6 +35,6 @@ class IndexControllerFactory implements FactoryInterface
     {
         $sm = $serviceLocator->getServiceLocator();
         $model = $sm->get('UserDao');
-        return new IndexController($model);
+        return new AdminController($model);
     }
 }

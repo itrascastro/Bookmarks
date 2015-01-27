@@ -33,20 +33,29 @@ class UserDao
 
     public function findAll()
     {
-        $resultSet = $this->db->query('SELECT * FROM User', Adapter::QUERY_MODE_EXECUTE);
+        $rowset = $this->db->query('SELECT * FROM User', Adapter::QUERY_MODE_EXECUTE);
 
         $users = new \ArrayObject();
 
-        $count = $resultSet->count();
+        $count = $rowset->count();
 
         for ($i=0; $i < $count; $i++) {
-            $row = $resultSet->current();
+            $row = $rowset->current();
             $user = new User($row->id, $row->email, $row->password, $row->role, $row->date);
             $users->append($user);
-            $resultSet->next();
+            $rowset->next();
         }
 
         return $users;
+    }
+
+    public function getById($id)
+    {
+        $stm = $this->db->createStatement('SELECT * FROM User WHERE id = ?');
+        $rowset = $stm->execute(array($id));
+        $row = $rowset->current();
+
+        return new User($row['id'], $row['email'], $row['password'], $row['role'], $row['date']);
     }
 
     public function save($data)

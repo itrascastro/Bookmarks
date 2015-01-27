@@ -10,68 +10,68 @@
 return array(
     'router' => array(
         'routes' => array(
-            'user\index\index' => array(
+            'user\admin\index' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
-                    'route'    => '/user/',
+                    'route'    => '/admin/user/',
                     'defaults' => array(
-                        'controller' => 'User\Controller\Index',
+                        'controller' => 'User\Controller\Admin',
                         'action'     => 'index',
                     ),
                 ),
             ),
-            'user\index\add' => array(
+            'user\admin\add' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
-                    'route'    => '/user/add/',
+                    'route'    => '/admin/user/add/',
                     'defaults' => array(
-                        'controller' => 'User\Controller\Index',
+                        'controller' => 'User\Controller\Admin',
                         'action'     => 'add',
                     ),
                 ),
             ),
-            'user\index\addDo' => array(
+            'user\admin\addDo' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
-                    'route'    => '/user/add-do/',
+                    'route'    => '/admin/user/add-do/',
                     'defaults' => array(
-                        'controller' => 'User\Controller\Index',
+                        'controller' => 'User\Controller\Admin',
                         'action'     => 'addDo',
                     ),
                 ),
             ),
-            'user\index\delete' => array(
+            'user\admin\delete' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route'    => '/user/delete/id/[:id]/',
+                    'route'    => '/admin/user/delete/id/[:id]/',
                     'constraints' => array(
                         'id' => '[0-9]+',
                     ),
                     'defaults' => array(
-                        'controller' => 'User\Controller\Index',
+                        'controller' => 'User\Controller\Admin',
                         'action'     => 'delete',
                     ),
                 ),
             ),
-            'user\index\update' => array(
+            'user\admin\update' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route'    => '/user/update/id/[:id]/',
+                    'route'    => '/admin/user/update/id/[:id]/',
                     'constraints' => array(
                         'id' => '[0-9]+',
                     ),
                     'defaults' => array(
-                        'controller' => 'User\Controller\Index',
+                        'controller' => 'User\Controller\Admin',
                         'action'     => 'update',
                     ),
                 ),
             ),
-            'user\index\updateDo' => array(
+            'user\admin\updateDo' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
-                    'route'    => '/user/update-do/',
+                    'route'    => '/admin/user/update-do/',
                     'defaults' => array(
-                        'controller' => 'User\Controller\Index',
+                        'controller' => 'User\Controller\Admin',
                         'action'     => 'updateDo',
                     ),
                 ),
@@ -98,7 +98,7 @@ return array(
             //'User\Controller\Index' => 'User\Controller\IndexController'
         ),
         'factories' => array(
-            'User\Controller\Index' => 'User\Controller\Factory\IndexControllerFactory',
+            'User\Controller\Admin' => 'User\Controller\Factory\AdminControllerFactory',
         ),
     ),
     'view_manager' => array(
@@ -109,7 +109,7 @@ return array(
         'exception_template'       => 'error/index',
         'template_map' => array(
             'layout/layout'        => __DIR__ . '/../view/layout/layout.phtml',
-            'user/index/index'     => __DIR__ . '/../view/user/index/index.phtml',
+            //'user/index/index'     => __DIR__ . '/../view/user/index/index.phtml',
             'error/404'            => __DIR__ . '/../view/error/404.phtml',
             'error/index'          => __DIR__ . '/../view/error/index.phtml',
             'partial/form'         => __DIR__ . '/../view/partial/newUserForm.phtml',

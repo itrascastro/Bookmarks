@@ -21,7 +21,7 @@ use User\Model\UserDao;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
-class IndexController extends AbstractActionController
+class AdminController extends AbstractActionController
 {
     /**
      * @var UserDao
@@ -45,7 +45,7 @@ class IndexController extends AbstractActionController
 
     public function addAction()
     {
-        return [array('action' => $this->url('user\index\addDo'), 'id' => null)];
+        return ['title' => 'Add User','action' => $this->url()->fromRoute('user\admin\addDo'), 'user' => null];
     }
 
     public function addDoAction()
@@ -53,7 +53,7 @@ class IndexController extends AbstractActionController
         $data = $this->params()->fromPost();
         $this->model->save($data);
 
-        $this->redirect()->toRoute('user\index\index');
+        $this->redirect()->toRoute('user\admin\index');
     }
 
     public function deleteAction()
@@ -61,17 +61,19 @@ class IndexController extends AbstractActionController
         $id = $this->params()->fromRoute('id');
         $this->model->delete($id);
 
-        $this->redirect()->toRoute('user\index\index');
+        $this->redirect()->toRoute('user\admin\index');
     }
 
     public function updateAction()
     {
         $id = $this->params()->fromRoute('id');
+        $user = $this->model->getById($id);
 
         $view = new ViewModel();
-        $view->setTemplate('user/index/add.phtml');
-        //$view->action = $this->url('user\index\index');
-        $view->id = $id;
+        $view->setTemplate('user/admin/add.phtml');
+        $view->title = 'Upate User';
+        $view->action =  $this->url()->fromRoute('user\admin\updateDo');
+        $view->user = $user;
 
         return $view;
     }
@@ -81,6 +83,6 @@ class IndexController extends AbstractActionController
         $data = $this->params()->fromPost();
         $this->model->update($data);
 
-        $this->redirect()->toRoute('user\index\index');
+        $this->redirect()->toRoute('user\admin\index');
     }
 }
