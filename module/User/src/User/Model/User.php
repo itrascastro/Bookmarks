@@ -20,18 +20,20 @@ namespace User\Model;
 class User 
 {
     private $id;
+    private $username;
     private $email;
     private $password;
     private $role;
     private $date;
 
-    function __construct($id, $email, $password, $role, $date)
+    function __construct($id, $username, $email, $password, $role, $date)
     {
-        $this->id = $id;
-        $this->email = $email;
-        $this->password = $password;
-        $this->role = $role;
-        $this->date = $date;
+        $this->id           = $id;
+        $this->username     = $username;
+        $this->email        = $email;
+        $this->password     = $password;
+        $this->role         = $role;
+        $this->date         = $date;
     }
 
     /**
@@ -48,6 +50,22 @@ class User
     public function setId($id)
     {
         $this->id = $id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    /**
+     * @param mixed $username
+     */
+    public function setUsername($username)
+    {
+        $this->username = $username;
     }
 
     /**

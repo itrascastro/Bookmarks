@@ -15,7 +15,7 @@ return array(
                 'options' => array(
                     'route'    => '/admin/user/',
                     'defaults' => array(
-                        'controller' => 'User\Controller\Admin',
+                        'controller' => 'User\Controller\User',
                         'action'     => 'index',
                     ),
                 ),
@@ -25,7 +25,7 @@ return array(
                 'options' => array(
                     'route'    => '/admin/user/add/',
                     'defaults' => array(
-                        'controller' => 'User\Controller\Admin',
+                        'controller' => 'User\Controller\User',
                         'action'     => 'add',
                     ),
                 ),
@@ -35,7 +35,7 @@ return array(
                 'options' => array(
                     'route'    => '/admin/user/add-do/',
                     'defaults' => array(
-                        'controller' => 'User\Controller\Admin',
+                        'controller' => 'User\Controller\User',
                         'action'     => 'addDo',
                     ),
                 ),
@@ -48,7 +48,7 @@ return array(
                         'id' => '[0-9]+',
                     ),
                     'defaults' => array(
-                        'controller' => 'User\Controller\Admin',
+                        'controller' => 'User\Controller\User',
                         'action'     => 'delete',
                     ),
                 ),
@@ -61,7 +61,7 @@ return array(
                         'id' => '[0-9]+',
                     ),
                     'defaults' => array(
-                        'controller' => 'User\Controller\Admin',
+                        'controller' => 'User\Controller\User',
                         'action'     => 'update',
                     ),
                 ),
@@ -71,8 +71,18 @@ return array(
                 'options' => array(
                     'route'    => '/admin/user/update-do/',
                     'defaults' => array(
-                        'controller' => 'User\Controller\Admin',
+                        'controller' => 'User\Controller\User',
                         'action'     => 'updateDo',
+                    ),
+                ),
+            ),
+            'user\user\users' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/users/',
+                    'defaults' => array(
+                        'controller' => 'User\Controller\User',
+                        'action'     => 'users',
                     ),
                 ),
             ),
@@ -83,22 +93,12 @@ return array(
             'UserDao' => 'User\Model\Factory\UserDaoFactory',
         ),
     ),
-    'translator' => array(
-        'locale' => 'en_US',
-        'translation_file_patterns' => array(
-            array(
-                'type'     => 'gettext',
-                'base_dir' => __DIR__ . '/../language',
-                'pattern'  => '%s.mo',
-            ),
-        ),
-    ),
     'controllers' => array(
         'invokables' => array(
             //'User\Controller\Index' => 'User\Controller\IndexController'
         ),
         'factories' => array(
-            'User\Controller\Admin' => 'User\Controller\Factory\AdminControllerFactory',
+            'User\Controller\User' => 'User\Controller\Factory\UserControllerFactory',
         ),
     ),
     'view_manager' => array(

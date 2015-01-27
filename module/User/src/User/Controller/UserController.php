@@ -21,7 +21,7 @@ use User\Model\UserDao;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
-class AdminController extends AbstractActionController
+class UserController extends AbstractActionController
 {
     /**
      * @var UserDao
@@ -37,6 +37,14 @@ class AdminController extends AbstractActionController
     }
 
     public function indexAction()
+    {
+        $users = $this->model->findAll();
+
+        return ['users' => $users];
+
+    }
+
+    public function usersAction()
     {
         $users = $this->model->findAll();
 
@@ -70,7 +78,7 @@ class AdminController extends AbstractActionController
         $user = $this->model->getById($id);
 
         $view = new ViewModel();
-        $view->setTemplate('user/admin/add.phtml');
+        $view->setTemplate('user/user/add.phtml');
         $view->title = 'Upate User';
         $view->action =  $this->url()->fromRoute('user\admin\updateDo');
         $view->user = $user;

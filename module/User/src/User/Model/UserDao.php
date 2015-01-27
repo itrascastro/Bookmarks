@@ -41,7 +41,7 @@ class UserDao
 
         for ($i=0; $i < $count; $i++) {
             $row = $rowset->current();
-            $user = new User($row->id, $row->email, $row->password, $row->role, $row->date);
+            $user = new User($row->id, $row->username, $row->email, $row->password, $row->role, $row->date);
             $users->append($user);
             $rowset->next();
         }
@@ -55,13 +55,13 @@ class UserDao
         $rowset = $stm->execute(array($id));
         $row = $rowset->current();
 
-        return new User($row['id'], $row['email'], $row['password'], $row['role'], $row['date']);
+        return new User($row['id'], $row['username'], $row['email'], $row['password'], $row['role'], $row['date']);
     }
 
     public function save($data)
     {
-        $stm = $this->db->createStatement('INSERT INTO User (email, password, role) VALUES (?, ?, ?)');
-        $stm->execute(array($data['email'], $data['password'], $data['role']));
+        $stm = $this->db->createStatement('INSERT INTO User (username, email, password, role) VALUES (?, ?, ?, ?)');
+        $stm->execute(array($data['username'], $data['email'], $data['password'], $data['role']));
     }
 
     public function delete($id)
@@ -72,8 +72,8 @@ class UserDao
 
     public function update($data)
     {
-        $stm = $this->db->createStatement('UPDATE User SET email = ?, password = ?, role = ? WHERE id = ?');
-        $stm->execute(array($data['email'], $data['password'], $data['role'], $data['id']));
+        $stm = $this->db->createStatement('UPDATE User SET username = ?, email = ?, password = ?, role = ? WHERE id = ?');
+        $stm->execute(array($data['username'], $data['email'], $data['password'], $data['role'], $data['id']));
     }
 
 }

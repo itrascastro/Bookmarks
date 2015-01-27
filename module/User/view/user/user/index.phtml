@@ -4,6 +4,7 @@
     <table class="table table-bordered">
         <thead>
             <th>Id</th>
+            <th>Username</th>
             <th>Email</th>
             <th>Password</th>
             <th>Role</th>
@@ -12,6 +13,7 @@
         <?php foreach ($users as $user): ?>
         <tr>
             <td><?php echo $this->escapeHtml($user->getId()); ?></td>
+            <td><?php echo $this->escapeHtml($user->getUsername()); ?></td>
             <td><?php echo $this->escapeHtml($user->getEmail()); ?></td>
             <td><?php echo $this->escapeHtml($user->getPassword()); ?></td>
             <td><?php echo $this->escapeHtml($user->getRole()); ?></td>
