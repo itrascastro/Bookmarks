@@ -10,7 +10,7 @@
 return array(
     'router' => array(
         'routes' => array(
-            'user\admin\index' => array(
+            'user\user\index' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
                     'route'    => '/admin/user/',
@@ -20,7 +20,7 @@ return array(
                     ),
                 ),
             ),
-            'user\admin\add' => array(
+            'user\user\add' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
                     'route'    => '/admin/user/add/',
@@ -30,7 +30,7 @@ return array(
                     ),
                 ),
             ),
-            'user\admin\addDo' => array(
+            'user\user\addDo' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
                     'route'    => '/admin/user/add-do/',
@@ -40,7 +40,7 @@ return array(
                     ),
                 ),
             ),
-            'user\admin\delete' => array(
+            'user\user\delete' => array(
                 'type' => 'Segment',
                 'options' => array(
                     'route'    => '/admin/user/delete/id/[:id]/',
@@ -53,7 +53,7 @@ return array(
                     ),
                 ),
             ),
-            'user\admin\update' => array(
+            'user\user\update' => array(
                 'type' => 'Segment',
                 'options' => array(
                     'route'    => '/admin/user/update/id/[:id]/',
@@ -66,7 +66,7 @@ return array(
                     ),
                 ),
             ),
-            'user\admin\updateDo' => array(
+            'user\user\updateDo' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
                     'route'    => '/admin/user/update-do/',

@@ -53,7 +53,7 @@ class UserController extends AbstractActionController
 
     public function addAction()
     {
-        return ['title' => 'Add User','action' => $this->url()->fromRoute('user\admin\addDo'), 'user' => null];
+        return ['title' => 'Add User','action' => $this->url()->fromRoute('user\user\addDo'), 'user' => null];
     }
 
     public function addDoAction()
@@ -61,7 +61,7 @@ class UserController extends AbstractActionController
         $data = $this->params()->fromPost();
         $this->model->save($data);
 
-        $this->redirect()->toRoute('user\admin\index');
+        $this->redirect()->toRoute('user\user\index');
     }
 
     public function deleteAction()
@@ -69,7 +69,9 @@ class UserController extends AbstractActionController
         $id = $this->params()->fromRoute('id');
         $this->model->delete($id);
 
-        $this->redirect()->toRoute('user\admin\index');
+        $this->identity();
+
+        $this->redirect()->toRoute('user\user\index');
     }
 
     public function updateAction()
@@ -80,7 +82,7 @@ class UserController extends AbstractActionController
         $view = new ViewModel();
         $view->setTemplate('user/user/add.phtml');
         $view->title = 'Upate User';
-        $view->action =  $this->url()->fromRoute('user\admin\updateDo');
+        $view->action =  $this->url()->fromRoute('user\user\updateDo');
         $view->user = $user;
 
         return $view;
@@ -91,6 +93,6 @@ class UserController extends AbstractActionController
         $data = $this->params()->fromPost();
         $this->model->update($data);
 
-        $this->redirect()->toRoute('user\admin\index');
+        $this->redirect()->toRoute('user\user\index');
     }
 }
