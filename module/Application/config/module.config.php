@@ -20,33 +20,138 @@ return array(
                     ),
                 ),
             ),
-            // The following is a route to simplify getting started creating
-            // new controllers and actions without needing to create a new
-            // module. Simply drop new controllers in, and you can access them
-            // using the path /application/:controller/:action
-            'application' => array(
-                'type'    => 'Literal',
+            'application\tag\index' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
-                    'route'    => '/application',
+                    'route'    => '/admin/tags/',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Application\Controller',
-                        'controller'    => 'Index',
-                        'action'        => 'index',
+                        'controller' => 'Application\Controller\Tag',
+                        'action'     => 'index',
                     ),
                 ),
-                'may_terminate' => true,
-                'child_routes' => array(
-                    'default' => array(
-                        'type'    => 'Segment',
-                        'options' => array(
-                            'route'    => '/[:controller[/:action]]',
-                            'constraints' => array(
-                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
-                            ),
-                            'defaults' => array(
-                            ),
-                        ),
+            ),
+            'application\tag\add' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/admin/tag/add/',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Tag',
+                        'action'     => 'add',
+                    ),
+                ),
+            ),
+            'application\tag\addDo' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/admin/tag/add-do/',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Tag',
+                        'action'     => 'addDo',
+                    ),
+                ),
+            ),
+            'application\tag\delete' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route'    => '/admin/tag/delete/id/[:id]/',
+                    'constraints' => array(
+                        'id' => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Tag',
+                        'action'     => 'delete',
+                    ),
+                ),
+            ),
+            'application\tag\update' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route'    => '/admin/tag/update/id/[:id]/',
+                    'constraints' => array(
+                        'id' => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Tag',
+                        'action'     => 'update',
+                    ),
+                ),
+            ),
+            'application\tag\updateDo' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/admin/tag/update-do/',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Tag',
+                        'action'     => 'updateDo',
+                    ),
+                ),
+            ),
+            'application\tag\tags' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/tags/',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Tag',
+                        'action'     => 'users',
+                    ),
+                ),
+            ),
+            'application\bookmark\index' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route'    => '/admin/bookmarks/',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Bookmark',
+                        'action'     => 'index',
+                    ),
+                ),
+            ),
+            'application\bookmark\addBookmark' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route'    => '/admin/bookmarks/add/',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Bookmark',
+                        'action'     => 'addBookmark',
+                    ),
+                ),
+            ),
+            'application\bookmark\info' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route'    => '/bookmarks/info/id/[:id]/',
+                    'constraints' => array(
+                        'id' => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Bookmark',
+                        'action'     => 'info',
+                    ),
+                ),
+            ),
+            'application\bookmark\update' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route'    => '/admin/bookmarks/update/id/[:id]/',
+                    'constraints' => array(
+                        'id' => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Bookmark',
+                        'action'     => 'update',
+                    ),
+                ),
+            ),
+            'application\bookmark\delete' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route'    => '/admin/bookmarks/delete/id/[:id]/',
+                    'constraints' => array(
+                        'id' => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Bookmark',
+                        'action'     => 'delete',
                     ),
                 ),
             ),
@@ -54,7 +159,8 @@ return array(
     ),
     'service_manager' => array(
         'factories' => array(
-            'database' => 'Zend\Db\Adapter\AdapterServiceFactory',
+            'TagDao'    => 'Application\Model\Factory\TagDaoFactory',
+            'Application\Model\BookmarkDao' => 'Application\Model\Factory\BookmarkDaoFactory',
         ),
     ),
     'translator' => array(
@@ -70,6 +176,10 @@ return array(
     'controllers' => array(
         'invokables' => array(
             'Application\Controller\Index' => 'Application\Controller\IndexController'
+        ),
+        'factories' => array(
+            'Application\Controller\Tag' => 'Application\Controller\Factory\TagControllerFactory',
+            'Application\Controller\Bookmark' => 'Application\Controller\Factory\BookmarkControllerFactory',
         ),
     ),
     'view_manager' => array(

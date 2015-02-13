@@ -1,0 +1,22 @@
+<h1>Tags</h1>
+
+<div>
+    <table class="table table-bordered">
+        <thead>
+        <th>Id</th>
+        <th>Name</th>
+        </thead>
+        <?php foreach ($tags as $tag): ?>
+            <tr>
+                <td><?php echo $this->escapeHtml($tag->getId()); ?></td>
+                <td><?php echo $this->escapeHtml($tag->getName()); ?></td>
+                <td><a class="btn btn-success" href="<?php echo $this->url('application\tag\update', array('id' => $tag->getId())); ?>">Update</a></td>
+                <td><a class="btn btn-danger" href="<?php echo $this->url('application\tag\delete', array('id' => $tag->getId())); ?>">Delete</a></td>
+            </tr>
+        <?php endforeach; ?>
+    </table>
+</div>
+
+<div>
+    <a class="btn btn-success" href="<?php echo $this->url('application\tag\add'); ?>">New Tag</a>
+</div>

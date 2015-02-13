@@ -1,0 +1,40 @@
+<div>
+    <table class="table table-bordered">
+        <thead>
+            <th>id</th>
+            <th>url</th>
+            <th>title</th>
+            <th>description</th>
+            <th>tags</th>
+            <th>date</th>
+            <th>votes</th>
+            <th>idUser</th>
+        </thead>
+        <?php foreach ($bookmarks as $bookmark): ?>
+        <tr>
+            <td><a href="<?php echo $this->url('application\bookmark\info', ['id' => $bookmark->getId()]) ?>"><?php echo $this->escapeHtml($bookmark->getId()); ?></a></td>
+            <td><?php echo $this->escapeHtml($bookmark->getUrl()); ?></td>
+            <td><?php echo $this->escapeHtml($bookmark->getTitle()); ?></td>
+            <td><?php echo $this->escapeHtml($bookmark->getDescription()); ?></td>
+            <td>
+                <table>
+                    <?php foreach($bookmark->tags as $tag): ?>
+                        <tr>
+                            <td><?php echo $tag->getName(); ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </table>
+            </td>
+            <td><?php echo $this->escapeHtml($bookmark->getDate()); ?></td>
+            <td><?php echo $this->escapeHtml($bookmark->getVotes()); ?></td>
+            <td><?php echo $this->escapeHtml($bookmark->getIdUser()); ?></td>
+            <td><a class="btn btn-success" href="<?php echo $this->url('application\bookmark\update', ['id' => $bookmark->getId()]) ?>">Update</a></td>
+            <td><a class="btn btn-danger" href="<?php echo $this->url('application\bookmark\delete', ['id' => $bookmark->getId()]) ?>">Delete</a></td>
+        </tr>
+        <?php endforeach; ?>
+    </table>
+</div>
+
+<div>
+    <a href="<?php echo $this->url('application\bookmark\addBookmark') ?>">Insert New Bookmark</a>
+</div>
