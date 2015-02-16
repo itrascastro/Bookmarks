@@ -17,7 +17,7 @@
 namespace User\Model;
 
 
-class User 
+class UserModel
 {
     private $id;
     private $username;
@@ -26,7 +26,7 @@ class User
     private $role;
     private $date;
 
-    function __construct($id, $username, $email, $password, $role, $date)
+    function __construct($id = null, $username = null, $email = null, $password = null, $role = null, $date = null)
     {
         $this->id           = $id;
         $this->username     = $username;
@@ -34,6 +34,21 @@ class User
         $this->password     = $password;
         $this->role         = $role;
         $this->date         = $date;
+    }
+
+    public function exchangeArray($data)
+    {
+        $this->id           = (!empty($data['id'])) ? $data['id'] : null;
+        $this->username     = (!empty($data['username'])) ? $data['username'] : null;
+        $this->email        = (!empty($data['email'])) ? $data['email'] : null;
+        $this->password     = (!empty($data['password'])) ? $data['password'] : null;
+        $this->role         = (!empty($data['role'])) ? $data['role'] : null;
+        $this->date         = (!empty($data['date'])) ? $data['date'] : null;
+    }
+
+    public function getArrayCopy()
+    {
+        return get_object_vars($this);
     }
 
     /**
@@ -131,7 +146,4 @@ class User
     {
         $this->date = $date;
     }
-
-
-
 }

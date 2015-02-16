@@ -1,0 +1,31 @@
+<div>
+    <?php foreach ($messages as $m): ?>
+    <p><?php echo $m ?></p>
+    <?php endforeach; ?>
+</div>
+
+<?php echo $this->form()->openTag($form); ?>
+    <table>
+        <tr>
+            <td colspan="2"><?php echo $this->formElementErrors($form->get('email')); ?></td>
+        </tr>
+        <tr>
+            <td><strong>Email:</strong></td>
+            <td><?php echo $this->formElement($form->get('email')) ?></td>
+        </tr>
+        <tr>
+            <td colspan="2"><?php echo $this->formElementErrors($form->get('password')); ?></td>
+        </tr>
+        <tr>
+            <td><strong>Password:</strong></td>
+            <td><?php echo $this->formElement($form->get('password')) ?></td>
+        </tr>
+        <tr>
+            <td><strong>Remember Me?:</strong></td>
+            <td><?php echo $this->formElement($form->get('rememberme')) ?></td>
+        </tr>
+        <tr align="right">
+            <td colspan="2"><?php echo $this->formElement($form->get('submit')) ?></td>
+        </tr>
+    </table>
+<?php echo $this->form()->closeTag(); ?>

@@ -1,0 +1,28 @@
+<div>
+    <table class="table table-bordered">
+        <tr>
+            <th>Id</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th>Role</th>
+            <th>Date</th>
+        </tr>
+        <?php foreach($this->users as $user): ?>
+            <tr>
+                <td><a href="<?php echo $this->url('user\users\view', ['id' => $user->getId()]) ?>"><?php echo $this->escapeHtml($user->getId()); ?></a></td>
+                <td><?php echo $this->escapeHtml($user->getUsername()); ?></td>
+                <td><?php echo $this->escapeHtml($user->getEmail()); ?></td>
+                <td><?php echo $this->escapeHtml($user->getPassword()); ?></td>
+                <td><?php echo $this->escapeHtml($user->getRole()); ?></td>
+                <td><?php echo $this->escapeHtml($user->getDate()); ?></td>
+                <td><a class="btn btn-success" href="<?php echo $this->url('user\users\update', ['id' => $user->getId()]) ?>">Update</a></td>
+                <td><a class="btn btn-danger" href="<?php echo $this->url('user\users\delete', ['id' => $user->getId()]) ?>">Delete</a></td>
+            </tr>
+        <?php endforeach; ?>
+    </table>
+</div>
+
+<div>
+    <p><a href="<?php echo $this->url('user\users\create') ?>">Create a new User</a> | <a href="<?php echo $this->url('user\login\logout') ?>">Logout</a> </p>
+</div>

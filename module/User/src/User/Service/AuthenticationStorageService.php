@@ -14,27 +14,22 @@
  * file that was distributed with this source code.
  */
 
-namespace User\Controller;
+namespace User\Service;
 
 
-use Zend\Mvc\Controller\AbstractActionController;
+use Zend\Authentication\Storage\Session;
 
-class LogController extends AbstractActionController
+class AuthenticationStorageService extends Session
 {
-    public function inAction()
+    public function setRememberMe($rememberMe = 0, $time = 1209600)
     {
-        if (!$this->getRequest()->isPost()) {
-            return [];
+        if ($rememberMe == 1) {
+            $this->session->getManager()->rememberMe($time);
         }
-
-        $data = $this->params()->fromPost();
-        $email = $data['email'];
-        $password = $data['password'];
-
     }
 
-    public function outAction()
+    public function forgetMe()
     {
-
+        $this->session->getManager()->forgetMe();
     }
 }

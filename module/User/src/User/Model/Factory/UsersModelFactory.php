@@ -17,11 +17,14 @@
 namespace User\Model\Factory;
 
 
-use User\Model\UserDao;
+use User\Model\UserModel;
+use User\Model\UsersModel;
+use Zend\Db\ResultSet\ResultSet;
+use Zend\Db\TableGateway\TableGateway;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class UserDaoFactory implements FactoryInterface
+class UsersModelFactory implements FactoryInterface
 {
 
     /**
@@ -33,8 +36,12 @@ class UserDaoFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $db = $serviceLocator->get('database');
+        $resultSetPrototype = new ResultSet();
+        $resultSetPrototype->setArrayObjectPrototype(new UserModel());
+        $adapter = $serviceLocator->get('database');
+        $table = 'User';
+        $tablegateway = new TableGateway($table, $adapter, null, $resultSetPrototype);
 
-        return new UserDao($db);
+        return new UsersModel($tablegateway);
     }
 }

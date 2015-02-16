@@ -1,128 +1,139 @@
 <?php
-/**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/ZendSkeletonApplication for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- */
-
 return array(
     'router' => array(
         'routes' => array(
-            'user\user\index' => array(
-                'type' => 'Zend\Mvc\Router\Http\Literal',
+            'user\users\index' => array(
+                'type' => 'Literal',
                 'options' => array(
-                    'route'    => '/admin/user/',
+                    'route'    => '/admin/users/',
                     'defaults' => array(
-                        'controller' => 'User\Controller\User',
+                        'controller' => 'User\Controller\Users',
                         'action'     => 'index',
                     ),
                 ),
             ),
-            'user\user\add' => array(
-                'type' => 'Zend\Mvc\Router\Http\Literal',
-                'options' => array(
-                    'route'    => '/admin/user/add/',
+            'user\users\view' => array(
+                'type'              => 'Segment',
+                'options'           => array(
+                    'route'         => '/admin/users/view/id/[:id]/',
+                    'constraints'   => array(
+                        'id' => '[0-9]+',
+                    ),
                     'defaults' => array(
-                        'controller' => 'User\Controller\User',
-                        'action'     => 'add',
+                        'controller' => 'User\Controller\Users',
+                        'action'     => 'view',
                     ),
                 ),
             ),
-            'user\user\addDo' => array(
-                'type' => 'Zend\Mvc\Router\Http\Literal',
+            'user\users\create' => array(
+                'type' => 'Literal',
                 'options' => array(
-                    'route'    => '/admin/user/add-do/',
+                    'route'    => '/admin/users/create/',
                     'defaults' => array(
-                        'controller' => 'User\Controller\User',
-                        'action'     => 'addDo',
+                        'controller' => 'User\Controller\Users',
+                        'action'     => 'create',
                     ),
                 ),
             ),
-            'user\user\delete' => array(
+            'user\users\doCreate' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route'    => '/admin/users/do-create/',
+                    'defaults' => array(
+                        'controller' => 'User\Controller\Users',
+                        'action'     => 'doCreate',
+                    ),
+                ),
+            ),
+            'user\users\delete' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route'    => '/admin/user/delete/id/[:id]/',
+                    'route'    => '/admin/users/delete/id/[:id]/',
                     'constraints' => array(
                         'id' => '[0-9]+',
                     ),
                     'defaults' => array(
-                        'controller' => 'User\Controller\User',
+                        'controller' => 'User\Controller\Users',
                         'action'     => 'delete',
                     ),
                 ),
             ),
-            'user\user\update' => array(
+            'user\users\update' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route'    => '/admin/user/update/id/[:id]/',
+                    'route'    => '/admin/users/update/id/[:id]/',
                     'constraints' => array(
                         'id' => '[0-9]+',
                     ),
                     'defaults' => array(
-                        'controller' => 'User\Controller\User',
+                        'controller' => 'User\Controller\Users',
                         'action'     => 'update',
                     ),
                 ),
             ),
-            'user\user\updateDo' => array(
-                'type' => 'Zend\Mvc\Router\Http\Literal',
+            'user\users\doUpdate' => array(
+                'type' => 'Literal',
                 'options' => array(
-                    'route'    => '/admin/user/update-do/',
+                    'route'    => '/admin/users/do-update/',
                     'defaults' => array(
-                        'controller' => 'User\Controller\User',
-                        'action'     => 'updateDo',
+                        'controller' => 'User\Controller\Users',
+                        'action'     => 'doUpdate',
                     ),
                 ),
             ),
-            'user\user\users' => array(
-                'type' => 'Zend\Mvc\Router\Http\Literal',
+            'user\login\login' => array(
+                'type' => 'Literal',
                 'options' => array(
-                    'route'    => '/users/',
+                    'route'    => '/login/',
                     'defaults' => array(
-                        'controller' => 'User\Controller\User',
-                        'action'     => 'users',
+                        'controller' => 'User\Controller\Login',
+                        'action'     => 'login',
+                    ),
+                ),
+            ),
+            'user\login\doLogin' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route'    => '/doLogin/',
+                    'defaults' => array(
+                        'controller' => 'User\Controller\Login',
+                        'action'     => 'doLogin',
+                    ),
+                ),
+            ),
+            'user\login\logout' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route'    => '/logout/',
+                    'defaults' => array(
+                        'controller' => 'User\Controller\Login',
+                        'action'     => 'logout',
                     ),
                 ),
             ),
         ),
     ),
     'service_manager' => array(
+        'aliases' => array(
+            'Zend\Authentication\AuthenticationService' => 'User\Service\Authentication', // needed for identity plugin
+        ),
         'factories' => array(
-            'UserDao' => 'User\Model\Factory\UserDaoFactory',
+            'User\Model\UsersModel'                 => 'User\Model\Factory\UsersModelFactory',
+            'User\Service\AuthenticationStorage'    => 'User\Service\Factory\AuthenticationStorageServiceFactory',
+            'User\Service\Authentication'           => 'User\Service\Factory\AuthenticationServiceFactory',
         ),
     ),
     'controllers' => array(
-        'invokables' => array(
-            //'User\Controller\Index' => 'User\Controller\IndexController'
-        ),
         'factories' => array(
-            'User\Controller\User' => 'User\Controller\Factory\UserControllerFactory',
+            'User\Controller\Users' => 'User\Controller\Factory\UsersControllerFactory',
+            'User\Controller\Login' => 'User\Controller\Factory\LoginControllerFactory',
         ),
     ),
     'view_manager' => array(
-        'display_not_found_reason' => true,
-        'display_exceptions'       => true,
-        'doctype'                  => 'HTML5',
-        'not_found_template'       => 'error/404',
-        'exception_template'       => 'error/index',
-        'template_map' => array(
-            'layout/layout'        => __DIR__ . '/../view/layout/layout.phtml',
-            //'user/index/index'     => __DIR__ . '/../view/user/index/index.phtml',
-            'error/404'            => __DIR__ . '/../view/error/404.phtml',
-            'error/index'          => __DIR__ . '/../view/error/index.phtml',
-            'partial/form'         => __DIR__ . '/../view/partial/newUserForm.phtml',
+        'template_map'              => array(
         ),
-        'template_path_stack' => array(
+        'template_path_stack'       => array(
             __DIR__ . '/../view',
-        ),
-    ),
-    // Placeholder for console routes
-    'console' => array(
-        'router' => array(
-            'routes' => array(
-            ),
         ),
     ),
 );
