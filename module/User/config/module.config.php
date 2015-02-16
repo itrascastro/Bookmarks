@@ -9,6 +9,7 @@ return array(
                     'defaults' => array(
                         'controller' => 'User\Controller\Users',
                         'action'     => 'index',
+                        'roles'      => ['admin', 'user'],
                     ),
                 ),
             ),
@@ -22,6 +23,7 @@ return array(
                     'defaults' => array(
                         'controller' => 'User\Controller\Users',
                         'action'     => 'view',
+                        'roles'      => ['admin', 'user'],
                     ),
                 ),
             ),
@@ -32,6 +34,7 @@ return array(
                     'defaults' => array(
                         'controller' => 'User\Controller\Users',
                         'action'     => 'create',
+                        'roles'      => ['admin'],
                     ),
                 ),
             ),
@@ -42,6 +45,7 @@ return array(
                     'defaults' => array(
                         'controller' => 'User\Controller\Users',
                         'action'     => 'doCreate',
+                        'roles'      => ['admin'],
                     ),
                 ),
             ),
@@ -55,6 +59,7 @@ return array(
                     'defaults' => array(
                         'controller' => 'User\Controller\Users',
                         'action'     => 'delete',
+                        'roles'      => ['admin'],
                     ),
                 ),
             ),
@@ -68,6 +73,7 @@ return array(
                     'defaults' => array(
                         'controller' => 'User\Controller\Users',
                         'action'     => 'update',
+                        'roles'      => ['admin'],
                     ),
                 ),
             ),
@@ -78,6 +84,7 @@ return array(
                     'defaults' => array(
                         'controller' => 'User\Controller\Users',
                         'action'     => 'doUpdate',
+                        'roles'      => ['admin'],
                     ),
                 ),
             ),
@@ -88,6 +95,7 @@ return array(
                     'defaults' => array(
                         'controller' => 'User\Controller\Login',
                         'action'     => 'login',
+                        'roles'      => ['guest'],
                     ),
                 ),
             ),
@@ -98,6 +106,7 @@ return array(
                     'defaults' => array(
                         'controller' => 'User\Controller\Login',
                         'action'     => 'doLogin',
+                        'roles'      => ['guest'],
                     ),
                 ),
             ),
@@ -108,6 +117,7 @@ return array(
                     'defaults' => array(
                         'controller' => 'User\Controller\Login',
                         'action'     => 'logout',
+                        'roles'      => ['admin', 'user'],
                     ),
                 ),
             ),

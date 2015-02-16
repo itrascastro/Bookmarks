@@ -36,9 +36,9 @@ class UsersController extends AbstractActionController
 
     public function indexAction()
     {
-        if (!$this->identity()) {
-            $this->redirect()->toRoute('user\login\login');
-        }
+//        if (!$this->identity()) {
+//            $this->redirect()->toRoute('user\login\login');
+//        }
 
         $this->layout()->title = 'List Users';
         $users = $this->model->findAll();
@@ -167,6 +167,11 @@ class UsersController extends AbstractActionController
         }
 
         $this->redirect()->toRoute('user\users\index');
+    }
+
+    public function forbiddenAction()
+    {
+        return [];
     }
 }
 

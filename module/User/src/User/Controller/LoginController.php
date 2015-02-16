@@ -101,8 +101,8 @@ class LoginController extends AbstractActionController
                         $this->authenticationService->setStorage($this->storage);
                     }
 
-                    $userId = $this->adapter->getResultRowObject('id');
-                    $this->storage->write($userId);
+                    $user = $this->adapter->getResultRowObject();
+                    $this->storage->write($user);
                 }
 
                 return $this->redirect()->toRoute('user\users\index');
