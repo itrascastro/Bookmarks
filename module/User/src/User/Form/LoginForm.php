@@ -27,6 +27,7 @@ class LoginForm extends Form
 
         $this->setName('User');
         $this->setAttribute('method', 'post');
+        $this->setAttribute('class', 'form-signin');
 
         $this->add(array(
             'name' => 'email',

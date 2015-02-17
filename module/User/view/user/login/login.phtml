@@ -1,31 +1,26 @@
-<div>
-    <?php foreach ($messages as $m): ?>
-    <p><?php echo $m ?></p>
-    <?php endforeach; ?>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6 col-md-4 col-md-offset-4">
+            <div>
+                <?php foreach ($messages as $m): ?>
+                    <p><?php echo $m ?></p>
+                <?php endforeach; ?>
+            </div>
+            <div class="account-wall">
+                <img class="profile-img" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
+                     alt="">
+                <?php echo $this->form()->openTag($form); ?>
+                    <input type="email" name="email" class="form-control" placeholder="Email" required autofocus>
+                    <input type="password" name="password" class="form-control" placeholder="Password" required>
+                    <input class="btn btn-lg btn-primary btn-block" type="submit" name="submit" id="submitbutton" value="<?php echo $form->get('submit')->getValue() ?>">
+                    <label class="checkbox pull-left">
+                        <?php echo $this->formElement($form->get('rememberme')) ?>
+                        Remember me
+                    </label>
+                    <a href="#" class="pull-right need-help">Need help? </a><span class="clearfix"></span>
+                <?php echo $this->form()->closeTag(); ?>
+            </div>
+            <a href="#" class="text-center new-account">Create an account </a>
+        </div>
+    </div>
 </div>
-
-<?php echo $this->form()->openTag($form); ?>
-    <table>
-        <tr>
-            <td colspan="2"><?php echo $this->formElementErrors($form->get('email')); ?></td>
-        </tr>
-        <tr>
-            <td><strong>Email:</strong></td>
-            <td><?php echo $this->formElement($form->get('email')) ?></td>
-        </tr>
-        <tr>
-            <td colspan="2"><?php echo $this->formElementErrors($form->get('password')); ?></td>
-        </tr>
-        <tr>
-            <td><strong>Password:</strong></td>
-            <td><?php echo $this->formElement($form->get('password')) ?></td>
-        </tr>
-        <tr>
-            <td><strong>Remember Me?:</strong></td>
-            <td><?php echo $this->formElement($form->get('rememberme')) ?></td>
-        </tr>
-        <tr align="right">
-            <td colspan="2"><?php echo $this->formElement($form->get('submit')) ?></td>
-        </tr>
-    </table>
-<?php echo $this->form()->closeTag(); ?>

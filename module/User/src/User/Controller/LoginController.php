@@ -61,7 +61,7 @@ class LoginController extends AbstractActionController
         $this->layout()->title = 'Login';
 
         $form = new LoginForm();
-        $form->get('submit')->setValue('Login');
+        $form->get('submit')->setValue('Sign in');
         $form->setAttribute('action', $this->url()->fromRoute('user\login\doLogin'));
 
         return [
