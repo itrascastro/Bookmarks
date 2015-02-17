@@ -13,6 +13,6 @@
 
 return array(
     'application' => array(
-        'name' => 'Bookmarks App',
+        'name' => 'Bookmarks',
     ),
 );

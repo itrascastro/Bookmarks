@@ -32,6 +32,9 @@ class AuthenticationStorageServiceFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        return new AuthenticationStorageService('Bookmarks');
+        $config = $serviceLocator->get('config');
+        $appName = $config['application']['name'];
+
+        return new AuthenticationStorageService($appName);
     }
 }

@@ -54,7 +54,7 @@ class LoginController extends AbstractActionController
 
     public function loginAction()
     {
-        if ($this->authenticationService->hasIdentity()) {
+        if ($this->identity()) {
             return $this->redirect()->toRoute('user\users\index');
         }
 
@@ -80,6 +80,7 @@ class LoginController extends AbstractActionController
             $inputFilter = new LoginFormInputFilter();
             $form->setInputFilter($inputFilter->getInputFilter());
             $form->setData($request->getPost());
+            $messages = '';
 
             if ($form->isValid()) {
                 $data = $form->getData();
@@ -89,11 +90,8 @@ class LoginController extends AbstractActionController
                     ->setCredential($data['password'])
                 ;
 
-                $result = $this->adapter->authenticate();
-
-                foreach($result->getMessages() as $message) {
-                    $this->flashmessenger()->addMessage($message);
-                }
+                $result = $this->authenticationService->authenticate();
+                $messages = $result->getMessages();
 
                 if ($result->isValid()) {
                     if ($data['rememberme'] == 1 ) {
@@ -103,26 +101,28 @@ class LoginController extends AbstractActionController
 
                     $user = $this->adapter->getResultRowObject();
                     $this->storage->write($user);
-                }
 
-                return $this->redirect()->toRoute('user\users\index');
+                    return $this->redirect()->toRoute('user\users\index'); // success
+                }
             }
 
             $form->prepare();
 
             $this->layout()->title = 'Login - Error - Review your data';
 
-            // we reuse the create view
             $view = new ViewModel([
                 'form'      => $form,
-                'messages'  => $this->flashMessenger()->getMessages(),
+                'messages'  => $messages,
             ]);
             $view->setTemplate('user/login/login.phtml');
 
             return $view;
         }
 
-        $this->redirect()->toRoute('user\login\login');
+        // trying to access 'user\login\doLogin' directly
+        $this->flashMessenger()->addMessage('You must use this form');
+
+        return $this->redirect()->toRoute('user\login\login');
     }
 
     public function logoutAction()

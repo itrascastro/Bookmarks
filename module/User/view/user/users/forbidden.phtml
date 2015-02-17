@@ -1,1 +1,5 @@
-<div>Forbidden</div>
+<h1>Forbidden</h1>
+
+<p class="lead">You must authenticate in order to access <code><?php echo $this->serverUrl(true); ?></code> in this server</p>
+
+<div><a class="btn btn-default" href="<?php echo $this->url('user\login\login'); ?>">Login</a></div>

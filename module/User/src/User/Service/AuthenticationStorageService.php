@@ -21,7 +21,7 @@ use Zend\Authentication\Storage\Session;
 
 class AuthenticationStorageService extends Session
 {
-    public function setRememberMe($rememberMe = 0, $time = 1209600)
+    public function setRememberMe($rememberMe = 0, $time = 2592000)
     {
         if ($rememberMe == 1) {
             $this->session->getManager()->rememberMe($time);

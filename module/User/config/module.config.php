@@ -102,7 +102,7 @@ return array(
             'user\login\doLogin' => array(
                 'type' => 'Literal',
                 'options' => array(
-                    'route'    => '/doLogin/',
+                    'route'    => '/do-login/',
                     'defaults' => array(
                         'controller' => 'User\Controller\Login',
                         'action'     => 'doLogin',
