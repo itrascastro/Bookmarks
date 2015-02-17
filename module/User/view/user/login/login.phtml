@@ -1,15 +1,16 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-6 col-md-4 col-md-offset-4">
-            <div id="errors">
-                <?php if(is_array($messages)): ?>
+            <?php if(is_array($messages)): ?>
+                <div class="alert">
                     <ul>
                         <?php foreach ($messages as $msg): ?>
                             <li><?php echo $msg; ?></li>
                         <?php endforeach; ?>
                     </ul>
-                <?php endif; ?>
-            </div>
+                </div>
+
+            <?php endif; ?>
             <div class="account-wall">
                 <img class="profile-img" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
                      alt="">
