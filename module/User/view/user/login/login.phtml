@@ -1,20 +1,26 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-6 col-md-4 col-md-offset-4">
-            <div>
-                <?php foreach ($messages as $m): ?>
-                    <p><?php echo $m ?></p>
-                <?php endforeach; ?>
+            <div id="errors">
+                <?php if(is_array($messages)): ?>
+                    <ul>
+                        <?php foreach ($messages as $msg): ?>
+                            <li><?php echo $msg; ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                <?php endif; ?>
             </div>
             <div class="account-wall">
                 <img class="profile-img" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
                      alt="">
                 <?php echo $this->form()->openTag($form); ?>
-                    <input type="email" name="email" class="form-control" placeholder="Email" required autofocus>
-                    <input type="password" name="password" class="form-control" placeholder="Password" required>
-                    <input class="btn btn-lg btn-primary btn-block" type="submit" name="submit" id="submitbutton" value="<?php echo $form->get('submit')->getValue() ?>">
+                    <?php echo $this->formElementErrors($form->get('email')); ?>
+                    <?php echo $this->formElement($form->get('email')); ?>
+                    <?php echo $this->formElementErrors($form->get('password')); ?>
+                    <?php echo $this->formElement($form->get('password')); ?>
+                    <?php echo $this->formElement($form->get('submit')); ?>
                     <label class="checkbox pull-left">
-                        <?php echo $this->formElement($form->get('rememberme')) ?>
+                        <?php echo $this->formElement($form->get('rememberme')); ?>
                         Remember me
                     </label>
                     <a href="#" class="pull-right need-help">Need help? </a><span class="clearfix"></span>

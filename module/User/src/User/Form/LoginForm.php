@@ -33,7 +33,10 @@ class LoginForm extends Form
             'name' => 'email',
             'type' => 'Email',
             'attributes' => array(
-                'required' => 'required',
+                'class'         => 'form-control',
+                'required'      => 'required',
+                'autofocus'     => 'autofocus',
+                'placeholder'   => 'Email',
             ),
         ));
 
@@ -41,7 +44,9 @@ class LoginForm extends Form
             'name' => 'password',
             'type' => 'Password',
             'attributes' => array(
-                'required' => 'required',
+                'class'         => 'form-control',
+                'required'      => 'required',
+                'placeholder'   => 'Password',
             ),
         ));
 
@@ -55,6 +60,7 @@ class LoginForm extends Form
             'type' => 'Submit',
             'attributes' => array(
                 'id' => 'submitbutton',
+                'class' => 'btn btn-lg btn-primary btn-block',
             ),
         ));
     }
