@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-6 col-md-4 col-md-offset-4">
-            <?php if(is_array($messages)): ?>
+            <?php if(is_array($messages) && !empty($messages)): ?>
                 <div class="alert">
                     <ul>
                         <?php foreach ($messages as $msg): ?>
@@ -27,7 +27,7 @@
                     <a href="#" class="pull-right need-help">Need help? </a><span class="clearfix"></span>
                 <?php echo $this->form()->closeTag(); ?>
             </div>
-            <a href="#" class="text-center new-account">Create an account </a>
+            <a href="#" class="text-center new-account">Create an account</a>
         </div>
     </div>
 </div>

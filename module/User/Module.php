@@ -12,6 +12,7 @@ namespace User;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
+use Zend\Permissions\Acl\Acl;
 
 class Module implements AutoloaderProviderInterface
 {
@@ -32,21 +33,24 @@ class Module implements AutoloaderProviderInterface
             return;
         }
 
-        $controller     = $match->getParam('controller');
-        $action         = $match->getParam('action');
-        $roles          = $match->getParam('roles');
-
         $sm = $event->getApplication()->getServiceManager();
         $authenticationService = $sm->get('User\Service\Authentication');
 
+        /**
+         * @var Acl $acl
+         */
+        $acl = $sm->get('User\Service\Acl');
+
         $role = ($identity = $authenticationService->getIdentity()) ? $identity->role : 'guest';
 
-        if (!empty($roles) && !in_array($role, $roles)) {
+        if (!$acl->isAllowed($role, $match->getMatchedRouteName())) {
             $response = $event->getResponse();
             $response->setStatusCode(401); // Auth required
             $match->setParam('controller', 'User\Controller\Users');
             $match->setParam('action', 'forbidden');
         }
+
+        $event->getViewModel()->setVariable('acl', $acl);
     }
 
     public function getConfig()

@@ -18,8 +18,12 @@
                 <td><?php echo $this->escapeHtml($user->getPassword()); ?></td>
                 <td><?php echo $this->escapeHtml($user->getRole()); ?></td>
                 <td><?php echo $this->escapeHtml($user->getDate()); ?></td>
+                <?php if ($this->layout()->acl->isAllowed($this->identity()->role, 'user\users\update')): ?>
                 <td><a class="btn btn-success" href="<?php echo $this->url('user\users\update', ['id' => $user->getId()]) ?>">Update</a></td>
+                <?php endif; ?>
+                <?php if ($this->layout()->acl->isAllowed($this->identity()->role, 'user\users\delete')): ?>
                 <td><a class="btn btn-danger" href="<?php echo $this->url('user\users\delete', ['id' => $user->getId()]) ?>">Delete</a></td>
+                <?php endif; ?>
             </tr>
         <?php endforeach; ?>
     </table>

@@ -14,29 +14,29 @@
  * file that was distributed with this source code.
  */
 
-namespace User\Controller\Factory;
+namespace User\Form\Factory;
 
 
-use User\Controller\UsersController;
+use User\Form\InputFilter\LoginFormInputFilter;
+use User\Form\LoginForm;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class UsersControllerFactory implements FactoryInterface
+class LoginFormFactory implements FactoryInterface
 {
 
     /**
      * Create service
      *
      * @param ServiceLocatorInterface $serviceLocator
-     *
-     * @return mixed
+     * @return LoginForm
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $sm = $serviceLocator->getServiceLocator();
-        $model = $sm->get('User\Model\UsersModel');
-        $form = $sm->get('User\Form\User');
+        $form = new LoginForm();
+        $inputFilter = new LoginFormInputFilter();
+        $form->setInputFilter($inputFilter->getInputFilter());
 
-        return new UsersController($model, $form);
+        return $form;
     }
 }

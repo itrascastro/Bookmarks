@@ -34,7 +34,8 @@ class LoginControllerFactory implements FactoryInterface
     {
         $sm = $serviceLocator->getServiceLocator();
         $authenticationService = $sm->get('User\Service\Authentication');
+        $form = $sm->get('User\Form\Login');
 
-        return new LoginController($authenticationService);
+        return new LoginController($authenticationService, $form);
     }
 }

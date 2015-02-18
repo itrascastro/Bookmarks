@@ -14,29 +14,41 @@
  * file that was distributed with this source code.
  */
 
-namespace User\Controller\Factory;
+namespace User\Service\Factory;
 
 
-use User\Controller\UsersController;
+use Zend\Permissions\Acl\Acl;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class UsersControllerFactory implements FactoryInterface
+class AclServiceFactory implements FactoryInterface
 {
 
     /**
      * Create service
      *
      * @param ServiceLocatorInterface $serviceLocator
-     *
      * @return mixed
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $sm = $serviceLocator->getServiceLocator();
-        $model = $sm->get('User\Model\UsersModel');
-        $form = $sm->get('User\Form\User');
+        $acl = new Acl();
 
-        return new UsersController($model, $form);
+        $config = $serviceLocator->get('config');
+        $roles = $config['application']['roles'];
+
+        foreach ($roles as $role) {
+            $acl->addRole($role);
+        }
+
+        $routes = $config['router']['routes'];
+
+        foreach ($routes as $route => $value) {
+            $acl->addResource($route);
+            $routeRoles = array_key_exists('roles', $value['options']['defaults']) ? $value['options']['defaults']['roles'] : $roles;
+            $acl->allow($routeRoles, $route);
+        }
+
+        return $acl;
     }
 }
