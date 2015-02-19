@@ -48,6 +48,7 @@ class UsersModel
 
     public function save($data)
     {
+        $data['password'] = md5($data['password']);
         $this->tablegateway->insert($data);
     }
 
@@ -58,6 +59,7 @@ class UsersModel
 
     public function update($data)
     {
+        $data['password'] = md5($data['password']);
         $this->tablegateway->update($data, ['id' => $data['id']]);
     }
 }

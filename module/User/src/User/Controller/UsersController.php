@@ -49,6 +49,8 @@ class UsersController extends AbstractActionController
 //            $this->redirect()->toRoute('user\login\login');
 //        }
 
+//        $acl = $this->serviceLocator->get('User\Service\Acl');
+
         $this->layout()->title = 'List Users';
         $users = $this->model->findAll();
 
@@ -124,6 +126,7 @@ class UsersController extends AbstractActionController
         $user = $this->model->getById($this->params()->fromRoute('id'));
 
         $this->form->setAttribute('action', $this->url()->fromRoute('user\users\doUpdate'));
+        $user->setPassword('');
         $this->form->bind($user);
         $this->form->get('submit')->setAttribute('value', 'Edit User');
 

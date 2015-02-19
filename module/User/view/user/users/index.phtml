@@ -6,7 +6,6 @@
             <th>Id</th>
             <th>Username</th>
             <th>Email</th>
-            <th>Password</th>
             <th>Role</th>
             <th>Date</th>
         </tr>
@@ -15,7 +14,6 @@
                 <td><a href="<?php echo $this->url('user\users\view', ['id' => $user->getId()]) ?>"><?php echo $this->escapeHtml($user->getId()); ?></a></td>
                 <td><?php echo $this->escapeHtml($user->getUsername()); ?></td>
                 <td><?php echo $this->escapeHtml($user->getEmail()); ?></td>
-                <td><?php echo $this->escapeHtml($user->getPassword()); ?></td>
                 <td><?php echo $this->escapeHtml($user->getRole()); ?></td>
                 <td><?php echo $this->escapeHtml($user->getDate()); ?></td>
                 <?php if ($this->layout()->acl->isAllowed($this->identity()->role, 'user\users\update')): ?>

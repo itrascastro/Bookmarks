@@ -40,6 +40,7 @@ class AuthenticationServiceFactory implements FactoryInterface
             ->setTableName('User')
             ->setIdentityColumn('email')
             ->setCredentialColumn('password')
+            ->setCredentialTreatment('MD5(?)')
         ;
 
         $storage = $serviceLocator->get('User\Service\AuthenticationStorage');
