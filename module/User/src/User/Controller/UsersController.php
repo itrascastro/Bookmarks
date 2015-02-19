@@ -125,6 +125,8 @@ class UsersController extends AbstractActionController
 
         $user = $this->model->getById($this->params()->fromRoute('id'));
 
+        $this->form->get('password')->setAttribute('required', '');
+
         $this->form->setAttribute('action', $this->url()->fromRoute('user\users\doUpdate'));
         $user->setPassword('');
         $this->form->bind($user);
@@ -143,6 +145,8 @@ class UsersController extends AbstractActionController
 
         if ($request->isPost()) {
             $this->form->setData($request->getPost());
+
+            $this->form->getInputFilter()->get('password')->setAllowEmpty(true);
 
             if ($this->form->isValid()) {
                 $formData = $this->form->getData();

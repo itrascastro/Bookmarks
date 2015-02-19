@@ -59,7 +59,12 @@ class UsersModel
 
     public function update($data)
     {
-        $data['password'] = md5($data['password']);
+        if (!empty($data['password'])) {
+            $data['password'] = md5($data['password']);
+        } else {
+            unset($data['password']);
+        }
+
         $this->tablegateway->update($data, ['id' => $data['id']]);
     }
 }
