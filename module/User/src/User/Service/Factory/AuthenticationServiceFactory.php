@@ -16,7 +16,6 @@
 
 namespace User\Service\Factory;
 
-
 use Zend\Authentication\Adapter\DbTable\CredentialTreatmentAdapter;
 use Zend\Authentication\AuthenticationService;
 use Zend\ServiceManager\FactoryInterface;

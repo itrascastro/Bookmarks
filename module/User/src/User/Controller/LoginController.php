@@ -93,12 +93,10 @@ class LoginController extends AbstractActionController
                 ;
 
                 $result = $this->authenticationService->authenticate();
-                $messages = $result->getMessages();
 
                 if ($result->isValid()) {
                     if ($data['rememberme'] == 1 ) {
                         $this->storage->setRememberMe(1);
-                        $this->authenticationService->setStorage($this->storage);
                     }
 
                     $user = $this->adapter->getResultRowObject();
@@ -106,6 +104,8 @@ class LoginController extends AbstractActionController
 
                     return $this->redirect()->toRoute('user\users\index'); // success
                 }
+
+                $messages = $result->getMessages();
             }
 
             $this->form->prepare();
