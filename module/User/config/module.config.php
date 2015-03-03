@@ -12,6 +12,18 @@ return array(
                         'roles'      => ['admin', 'user'],
                     ),
                 ),
+                'may_terminate' => true, // parent route can be alone
+                'child_routes' => array(
+                    'paginator' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => 'page/[:page]/',
+                            'constraints' => array(
+                                'page' => '[0-9]+',
+                            ),
+                        ),
+                    ),
+                ),
             ),
             'user\users\view' => array(
                 'type'              => 'Segment',
@@ -133,7 +145,6 @@ return array(
             'User\Service\Authentication'           => 'User\Service\Factory\AuthenticationServiceFactory',
             'User\Form\User'                        => 'User\Form\Factory\UserFormFactory',
             'User\Form\Login'                       => 'User\Form\Factory\LoginFormFactory',
-            'User\Service\Acl'                      => 'User\Service\Factory\AclServiceFactory',
         ),
     ),
     'controllers' => array(

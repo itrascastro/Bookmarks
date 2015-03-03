@@ -17,6 +17,8 @@
 namespace User\Model;
 
 use Zend\Db\TableGateway\TableGateway;
+use Zend\Paginator\Adapter\DbTableGateway;
+use Zend\Paginator\Paginator;
 
 class UsersModel
 {
@@ -34,9 +36,20 @@ class UsersModel
     }
 
 
-    public function findAll()
+    /**
+     * findAll
+     *
+     * In this approach we are using DbTableGateway adapter which uses the tablegateway to take all the info needed
+     *
+     * If you need to create your own Select from different tables rather than the tablegateway table, you can use the DbSelect
+     * adapter instead: http://framework.zend.com/manual/current/en/tutorials/tutorial.pagination.html#modifying-the-albumtable
+     *
+     * @param bool $paginated
+     * @return \Zend\Db\ResultSet\ResultSet|Paginator
+     */
+    public function findAll($paginated = true)
     {
-        return $this->tablegateway->select();
+        return ($paginated) ? new Paginator(new DbTableGateway($this->tablegateway)) : $this->tablegateway->select();
     }
 
     public function getById($id)

@@ -49,10 +49,13 @@ class UsersController extends AbstractActionController
 //            $this->redirect()->toRoute('user\login\login');
 //        }
 
-//        $acl = $this->serviceLocator->get('User\Service\Acl');
+//        $acl = $this->serviceLocator->get('TrascastroACL');
 
         $this->layout()->title = 'List Users';
         $users = $this->model->findAll();
+
+        $users->setCurrentPageNumber($this->params()->fromRoute('page'));
+        $users->setItemCountPerPage(2);
 
         return ['users' => $users];
     }
